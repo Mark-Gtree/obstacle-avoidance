@@ -1,0 +1,78 @@
+# 配置文件
+/**:
+  ros__parameters:
+  # 接口配置
+    radar_can_interface: "can0"   # 雷达CAN接口
+    self_dev_port: "/dev/ttyS5"   # 自研飞控串口
+    self_dev_baud: 460800         # 自研飞控波特率
+    px4_port: "/dev/ttyS9"        # PX4开源飞控串口
+    px4_baud: 115200              # PX4开源飞控波特率
+    
+    # 通用参数
+    frame_id: "radar"
+    processing_rate: 10.0         # Hz
+    obstacle_dist_hz: 10.0        # 障碍物距离发布频率 
+    enable_visualization: true    # 可视化开关
+    enable_logging: true
+    enable_attitude_compensation: true
+    attitude_timeout: 0.3
+    attitude_stream_hz: 20.0
+    pitch_compensation_sign: 1.0
+    roll_compensation_sign: 1.0
+
+    # 点云预处理
+    min_power_threshold: 40.0     # 最小功率阈值
+    high_power_threshold: 52.0    # 高功率阈值
+    direct_map_power_threshold: 53.0 # 高置信度
+    merge_dist: 3.0               # 簇合并距离阈值
+    high_power_multiplier: 5      # 对比度因子
+    min_range: 3.0                # 最小检测距离
+    max_range: 57.0               # 最大检测距离
+    max_fov_deg: 20.0             # 最大水平FOV
+    min_x: -5.0                   # X轴最小值
+    max_x: 5.0                    # X轴最大值
+    max_z: 5.0                    # Z轴最大值
+    min_z: -2.0                   # Z轴最小值
+    min_elevation_deg: -10.0      # 最小俯仰角
+    max_elevation_deg: 20.0       # 最大俯仰角
+
+    # 空间聚类
+    # 统计学离群点移除(SOR)
+    sor_mean_k: 3                 # 临近点数量
+    sor_stddev_mul: 1.1           # 标准差倍数阈值
+    # 欧几里得聚类
+    cluster_tolerance_base: 0.2   # 近处的基础容差
+    cluster_tolerance_k: 0.05     # 距离系数
+    cluster_max_tolerance: 2.0    # 容差上限1.5
+    min_cluster_size: 5           # 最小聚类点数
+    max_cluster_size: 100        # 最大聚类点数
+    
+    # 栅格地图融合
+    # 地图参数
+    grid_resolution: 0.5          # 栅格分辨率(m)
+    grid_width: 5.0              # 地图宽度(m)
+    grid_height: 57.0             # 地图高度(m)
+    
+    # 占据判定
+    occupancy_threshold: 0.80      # 占据概率阈值[0,1]
+    
+    # 时序衰减
+    decay_rate: 0.65              # 衰减率[0,1]
+    decay_time: 0.5               # 衰减时间间隔(s)
+    
+    # 决策控制
+    # 距离阈值
+    emergency_distance: 5.0       # 紧急刹车距离(m)
+    danger_distance: 10.0         # 危险距离(m)
+    caution_distance: 57.0        # 警告距离(m)
+    
+    # 连续检测
+    min_continuous_frames: 3      # 最小连续检测帧数
+    warning_timeout: 0.5          # 告警超时时间(s)
+
+    # PX4模式切换
+    hold_trigger_distance: 17.0    # 切换到定点模式的距离阈值
+    base_mode_para: 129.0          # 基础模式参数
+    main_mode_para: 3.0            # 主模式参数
+    sub_mode_para: 0.0             # 子模式参数
+    min_avoidance_alt: 2.0         # 最小避障高度
